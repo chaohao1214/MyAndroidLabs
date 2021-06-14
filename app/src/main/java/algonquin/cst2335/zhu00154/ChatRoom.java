@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +29,6 @@ public class ChatRoom extends AppCompatActivity {
     MyChatAdapter adt = new MyChatAdapter();
 
     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a", Locale.getDefault());
-//    String currentDateandTime = sdf.format(new Date());
 
 
     @Override
@@ -70,8 +68,11 @@ public class ChatRoom extends AppCompatActivity {
         TextView timeText;
         int position = -1;
 
-        public MyRowViews(View itemView) {//itemview is a ConstraintLayout, that has <TextView> as subitem
+        public MyRowViews(View itemView) {
             super(itemView);
+
+            messageText = itemView.findViewById(R.id.message);
+            timeText = itemView.findViewById(R.id.time);
 
             itemView.setOnClickListener(click->{
 
@@ -103,8 +104,7 @@ public class ChatRoom extends AppCompatActivity {
 
             });
 
-            messageText = itemView.findViewById(R.id.message);
-            timeText = itemView.findViewById(R.id.time);
+
         }
 
         public void setPosition(int p){
@@ -150,7 +150,7 @@ public class ChatRoom extends AppCompatActivity {
         }
 
         @Override
-        public int getItemCount() {//how many items to show?
+        public int getItemCount() {
             return messages.size();
         }
 
