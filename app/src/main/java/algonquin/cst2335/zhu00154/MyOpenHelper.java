@@ -21,13 +21,13 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     // sql creation statement:
     @Override       //sql interprets SQL commands
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE table" + TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+        db.execSQL("CREATE Table " + TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 col_message + "TEXT, " + col_send_receive + "INTEGER," + col_time_sent + "TEXT);"); // run some sql
     } // create table words
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists" + TABLE_NAME);
+        db.execSQL("drop table if exists " + TABLE_NAME);
         onCreate(db);
     }
 }
