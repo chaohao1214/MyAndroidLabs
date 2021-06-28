@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.w( TAG, "In onCreate() - Loading Widgets" );
 
+        MyOpenHelper myOpenHelper = new MyOpenHelper(this);
+
         SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
 
         //prefs.getString("VariableName", String defaultValue);
