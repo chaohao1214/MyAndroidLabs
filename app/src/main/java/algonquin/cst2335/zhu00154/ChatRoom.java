@@ -37,6 +37,8 @@ public class ChatRoom extends AppCompatActivity {
 
         setContentView(R.layout.chatlayout);
 
+        MyOpenHelper opener = new MyOpenHelper();
+
         chatlist = findViewById(R.id.myrecycler);
 
         chatlist.setAdapter(adt);
