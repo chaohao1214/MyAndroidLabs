@@ -33,7 +33,7 @@ public class ChatRoom extends AppCompatActivity {
 
     SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a", Locale.getDefault());
     String time = sdf.format(new Date());
-
+    SQLiteDatabase db;
 
     ContentValues newRow = new ContentValues();
     //put something in each column, except _id:
@@ -46,7 +46,7 @@ public class ChatRoom extends AppCompatActivity {
         setContentView(R.layout.chatlayout);
 
         MyOpenHelper opener = new MyOpenHelper(this);
-        SQLiteDatabase db = opener.getWritableDatabase();
+        db= opener.getWritableDatabase();
         Cursor results = db.rawQuery("Select * from " + MyOpenHelper.TABLE_NAME + ";", null);
         int _idCol = results.getColumnIndex("_id");
         int messageCol = results.getColumnIndex(MyOpenHelper.col_message);
@@ -127,12 +127,15 @@ public class ChatRoom extends AppCompatActivity {
                             ChatMessage removedMessage = messages.get(position);
                             messages.remove(position);
                             adt.notifyItemRemoved(position);
+                            db.delete(MyOpenHelper.TABLE_NAME, "_id=?", new String[]{ Long.toString(removedMessage.getId())});
+
                             Snackbar.make(messageText,"You deleted message #" + position, Snackbar.LENGTH_LONG)
                                     .setAction("Undo",clk -> {
-
                                         messages.add(position,removedMessage);
                                         adt.notifyItemInserted(position);
-
+                                        db.execSQL("Insert into " + MyOpenHelper.TABLE_NAME + " values('" + removedMessage.getId()
+                                        + "',''" + removedMessage.getMessage() + "','" + removedMessage.getSentOrReceive() +
+                                                "','" + removedMessage.getTimeSent() + "');");
                                     })
                                     .show();
                         })
