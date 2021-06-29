@@ -1,5 +1,6 @@
 package algonquin.cst2335.zhu00154;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -13,6 +14,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public static final String col_send_receive = "SendOrReceive";
     public static final String col_time_sent = "TimeSent";
 
+
     public MyOpenHelper( Context context) {
         super(context, name, null, version);
         // all the constructor does
@@ -22,7 +24,8 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     @Override       //sql interprets SQL commands
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE Table " + TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                col_message + "TEXT, " + col_send_receive + "INTEGER," + col_time_sent + "TEXT);"); // run some sql
+                col_message + "TEXT, " + col_send_receive
+                + "INTEGER," + col_time_sent + "TEXT);"); // run some sql
     } // create table words
 
     @Override
