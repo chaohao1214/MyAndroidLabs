@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyOpenHelper extends SQLiteOpenHelper {
     public static final String name ="TheDatabase";
-    public static final int version =1;
+    public static final int version =3;
     public static final String TABLE_NAME = "Messages";
     public static final String col_message = "Message";
     public static final String col_send_receive = "SendOrReceive";
@@ -24,8 +24,8 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     @Override       //sql interprets SQL commands
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE Table " + TABLE_NAME + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                col_message + "TEXT, " + col_send_receive
-                + "INTEGER," + col_time_sent + "TEXT);"); // run some sql
+                col_message + " TEXT, " + col_send_receive
+                + " INTEGER," + col_time_sent + " TEXT);"); // run some sql
     } // create table words
 
     @Override

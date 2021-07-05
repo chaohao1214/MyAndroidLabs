@@ -73,7 +73,7 @@ public class ChatRoom extends AppCompatActivity {
         Button receiveBtn = findViewById(R.id.recButton);
 
         sentBtn.setOnClickListener(clk->{
-            ChatMessage thisMessage = new ChatMessage(messageTyped.getText().toString(),1,time);
+            ChatMessage thisMessage = new ChatMessage(messageTyped.getText().toString(),1,sdf.format(new Date()));
             messages.add(thisMessage);
             messageTyped.setText("");
             adt.notifyItemInserted(messages.size()-1);
@@ -81,14 +81,14 @@ public class ChatRoom extends AppCompatActivity {
             newRow.put(MyOpenHelper.col_message, thisMessage.getMessage());
             newRow.put(MyOpenHelper.col_send_receive, thisMessage.getSentOrReceive());
             newRow.put(MyOpenHelper.col_time_sent,thisMessage.getTimeSent());
-            db.insert(MyOpenHelper.TABLE_NAME, MyOpenHelper.col_message, newRow );
-
-            messages.add(thisMessage);
+           long id =  db.insert(MyOpenHelper.TABLE_NAME, MyOpenHelper.col_message, newRow );
+thisMessage.setId(id);
+         //   messages.add(thisMessage);
 
         });
 
         receiveBtn.setOnClickListener(clk->{
-            ChatMessage thisMessage = new ChatMessage(messageTyped.getText().toString(),2,time);
+            ChatMessage thisMessage = new ChatMessage(messageTyped.getText().toString(),2,sdf.format(new Date()));
             messages.add(thisMessage);
             messageTyped.setText("");
             adt.notifyItemInserted(messages.size()-1);
@@ -96,9 +96,9 @@ public class ChatRoom extends AppCompatActivity {
             newRow.put(MyOpenHelper.col_message, thisMessage.getMessage());
             newRow.put(MyOpenHelper.col_send_receive, thisMessage.getSentOrReceive());
             newRow.put(MyOpenHelper.col_time_sent,thisMessage.getTimeSent());
-            db.insert(MyOpenHelper.TABLE_NAME, MyOpenHelper.col_message, newRow );
-
-            messages.add(thisMessage);
+            long id = db.insert(MyOpenHelper.TABLE_NAME, MyOpenHelper.col_message, newRow );
+            thisMessage.setId(id);
+         //   messages.add(thisMessage);
         });
     }
 
@@ -134,7 +134,7 @@ public class ChatRoom extends AppCompatActivity {
                                         messages.add(position,removedMessage);
                                         adt.notifyItemInserted(position);
                                         db.execSQL("Insert into " + MyOpenHelper.TABLE_NAME + " values('" + removedMessage.getId()
-                                        + "',''" + removedMessage.getMessage() + "','" + removedMessage.getSentOrReceive() +
+                                        + "','" + removedMessage.getMessage() + "','" + removedMessage.getSentOrReceive() +
                                                 "','" + removedMessage.getTimeSent() + "');");
                                     })
                                     .show();
@@ -186,7 +186,7 @@ public class ChatRoom extends AppCompatActivity {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             MyRowViews thisRowLayout = (MyRowViews) holder;
             thisRowLayout.messageText.setText(messages.get(position).getMessage());
-            thisRowLayout.timeText.setText(sdf.format(messages.get(position).getTimeSent()));
+            thisRowLayout.timeText.setText(messages.get(position).getTimeSent());
             thisRowLayout.setPosition(position);
 
 
