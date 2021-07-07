@@ -35,7 +35,7 @@ public class ChatRoom extends AppCompatActivity {
     String time = sdf.format(new Date());
     SQLiteDatabase db;
 
-    ContentValues newRow = new ContentValues();
+
     //put something in each column, except _id:
 
 
@@ -82,7 +82,7 @@ public class ChatRoom extends AppCompatActivity {
             newRow.put(MyOpenHelper.col_send_receive, thisMessage.getSentOrReceive());
             newRow.put(MyOpenHelper.col_time_sent,thisMessage.getTimeSent());
            long id =  db.insert(MyOpenHelper.TABLE_NAME, MyOpenHelper.col_message, newRow );
-thisMessage.setId(id);
+            thisMessage.setId(id);
          //   messages.add(thisMessage);
 
         });
