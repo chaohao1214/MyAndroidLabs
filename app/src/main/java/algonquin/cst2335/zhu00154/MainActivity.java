@@ -74,19 +74,18 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String cityName = cityText.getText().toString();
                     stringURL= "https://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(cityName, "UTF-8")
-                            + "&appid=fb600597e13a613dd5d03f384ad828a3";
+                            + "&appid=fb600597e13a613dd5d03f384ad828a3&Units=Metric";
 
 
                     URL url = new URL(stringURL);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     InputStream in = new BufferedInputStream(urlConnection.getErrorStream());
 
-
-                    String text;
-                    text = (new BufferedReader(
+                    String text = (new BufferedReader(
                             new InputStreamReader(in, StandardCharsets.UTF_8)))
                             .lines()
                             .collect(Collectors.joining("\n"));
+
 
 
                     JSONObject theDocument = new JSONObject( text );
