@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Getting forecast")
                     .setMessage("We're calling people in " + cityName + "to look outside their windows" +
-                            "and tell us what's the weather like over there.")
+                            " and tell us what's the weather like over there.")
                     .setView(new ProgressBar(MainActivity.this))
                     .show();
 
