@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String cityName = cityText.getText().toString();
                     stringURL= "https://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(cityName, "UTF-8")
-                            + "&appid=fb600597e13a613dd5d03f384ad828a3&Units=Metric";
+                            + "&appid=fb600597e13a613dd5d03f384ad828a3&units=metric";
 
 
                     URL url = new URL(stringURL);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    InputStream in = new BufferedInputStream(urlConnection.getErrorStream());
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
                     String text = (new BufferedReader(
                             new InputStreamReader(in, StandardCharsets.UTF_8)))
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     if (file.exists()){
                         image = BitmapFactory.decodeFile(getFilesDir() + "/" + iconName + ".png");
                     } else{
-                        URL imgURL = new URL("https://openweathermap.org/img/w" + iconName + ".png");
+                        URL imgURL = new URL("https://openweathermap.org/img/w/" + iconName + ".png");
                         HttpURLConnection connection = (HttpURLConnection) imgURL.openConnection();
                         connection.connect();
                         int responseCode = connection.getResponseCode();
@@ -114,14 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    URL imgUrl = new URL( "https://openweathermap.org/img/w/" + iconName + ".png" );
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.connect();
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == 200) {
-                        image = BitmapFactory.decodeStream(connection.getInputStream());
 
-                    }
 
                     runOnUiThread(() ->{
                         TextView tv = findViewById(R.id.temp);
@@ -129,19 +122,19 @@ public class MainActivity extends AppCompatActivity {
                         tv.setVisibility(View.VISIBLE);
 
                         tv = findViewById(R.id.minTemp);
-                        tv.setText("The min temperature is " + current);
+                        tv.setText("The min temperature is " + min);
                         tv.setVisibility(View.VISIBLE);
 
                         tv = findViewById(R.id.maxTemp);
-                        tv.setText("The max temperature is " + current);
+                        tv.setText("The max temperature is " + max);
                         tv.setVisibility(View.VISIBLE);
 
                         tv = findViewById(R.id.humidity);
-                        tv.setText("The humidity is " + current);
+                        tv.setText("The humidity is " + humitidy);
                         tv.setVisibility(View.VISIBLE);
 
                         tv = findViewById(R.id.description);
-                        tv.setText("The description is " + current);
+                        tv.setText("The description is " + description);
                         tv.setVisibility(View.VISIBLE);
 
                         ImageView iv = findViewById(R.id.icon);
@@ -149,15 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         iv.setVisibility(View.VISIBLE);
                     });
 
-                    FileOutputStream fOut = null;
-                    try {
-                        fOut = openFileOutput( iconName + ".png", Context.MODE_PRIVATE);
-                        image.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                        fOut.flush();
-                        fOut.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException |JSONException e) {
