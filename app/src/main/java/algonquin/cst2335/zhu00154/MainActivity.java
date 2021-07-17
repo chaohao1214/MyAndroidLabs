@@ -21,9 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -147,17 +145,6 @@ public class MainActivity extends AppCompatActivity {
                             .collect(Collectors.joining("\n"));
 
 
-//                    JSONObject theDocument = new JSONObject( text );
-//                    JSONArray weatherArray = theDocument.getJSONArray("weather");
-//                    JSONObject position0 = weatherArray.getJSONObject(0);
-//                    String description = position0.getString("description");
-//                    String iconName = position0.getString("icon");
-//                    JSONObject mainObject = theDocument.getJSONObject( "main" );
-//                    double current = mainObject.getDouble("temp");
-//                    double min = mainObject.getDouble("temp_min");
-//                    double max = mainObject.getDouble("temp_max");
-//                    int humitidy = mainObject.getInt("humidity");
-
 
                     File file = new File(getFilesDir(), iconName + ".png");
                     if (file.exists()){
@@ -173,14 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-//                    URL imgUrl = new URL( "https://openweathermap.org/img/w/" + iconName + ".png" );
-//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                    connection.connect();
-//                    int responseCode = connection.getResponseCode();
-//                    if (responseCode == 200) {
-//                        image = BitmapFactory.decodeStream(connection.getInputStream());
-//
-//                    }
+
                     runOnUiThread(()->{
                         TextView tv = findViewById(R.id.temp);
                         tv.setText("The current temperature is " + current);
@@ -209,31 +189,6 @@ public class MainActivity extends AppCompatActivity {
                     });
 
 
-//                    runOnUiThread(() ->{
-//                        TextView tv = findViewById(R.id.temp);
-//                        tv.setText("The current temperature is " + current);
-//                        tv.setVisibility(View.VISIBLE);
-//
-//                        tv = findViewById(R.id.minTemp);
-//                        tv.setText("The min temperature is " + current);
-//                        tv.setVisibility(View.VISIBLE);
-//
-//                        tv = findViewById(R.id.maxTemp);
-//                        tv.setText("The max temperature is " + current);
-//                        tv.setVisibility(View.VISIBLE);
-//
-//                        tv = findViewById(R.id.humidity);
-//                        tv.setText("The humidity is " + current);
-//                        tv.setVisibility(View.VISIBLE);
-//
-//                        tv = findViewById(R.id.description);
-//                        tv.setText("The description is " + current);
-//                        tv.setVisibility(View.VISIBLE);
-//
-//                        ImageView iv = findViewById(R.id.icon);
-//                        iv.setImageBitmap(image);
-//                        iv.setVisibility(View.VISIBLE);
-//                    });
 
 
                 } catch (MalformedURLException e) {
