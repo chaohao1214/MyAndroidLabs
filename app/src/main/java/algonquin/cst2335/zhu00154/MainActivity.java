@@ -173,14 +173,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    URL imgUrl = new URL( "https://openweathermap.org/img/w/" + iconName + ".png" );
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.connect();
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == 200) {
-                        image = BitmapFactory.decodeStream(connection.getInputStream());
-
-                    }
+//                    URL imgUrl = new URL( "https://openweathermap.org/img/w/" + iconName + ".png" );
+//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                    connection.connect();
+//                    int responseCode = connection.getResponseCode();
+//                    if (responseCode == 200) {
+//                        image = BitmapFactory.decodeStream(connection.getInputStream());
+//
+//                    }
                     runOnUiThread(()->{
                         TextView tv = findViewById(R.id.temp);
                         tv.setText("The current temperature is " + current);
@@ -205,9 +205,7 @@ public class MainActivity extends AppCompatActivity {
                         ImageView iv = findViewById(R.id.icon);
                         iv.setImageBitmap(image);
                         iv.setVisibility(View.VISIBLE);
-
                         dialog.hide();
-
                     });
 
 
