@@ -4,7 +4,8 @@ package algonquin.cst2335.zhu00154;
 
 
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,9 +23,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     String max = null;
     String humidity = null;
 
-    //    EditText cityField = findViewById(R.id.cityTextField);
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         TextView currentTemp = findViewById(R.id.temp);
@@ -222,6 +228,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.popout_menu);
+        navigationView.setNavigationItemSelectedListener((item) -> {
+            onOptionsItemSelected(item);
+            drawer.closeDrawer(GravityCompat.START);
+                        return  false;
+                });
         forecastBtn.setOnClickListener(click -> {
             String cityName = cityText.getText().toString();
             myToolbar.getMenu().add(1, 5, 10, cityName).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
