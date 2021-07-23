@@ -62,12 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     String stringURL = null;
     Bitmap image = null;
-    String description = null;
-    String iconName = null;
-    String current = null;
-    String min = null;
-    String max = null;
-    String humidity = null;
+    float oldSize = 14;
 
 
     @Override
@@ -79,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         TextView description = findViewById(R.id.description);
         ImageView icon = findViewById(R.id.icon);
         EditText cityField = findViewById(R.id.cityTextField);
-        float oldSize = 14;
+
 
         switch (item.getItemId()) {
             case R.id.hide_views:
@@ -111,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 5: // re-run a previous search
                 String cityName = item.getTitle().toString();
+                cityField.setText(cityName);
                 runForecast(cityName);
         }
         return super.onOptionsItemSelected(item);

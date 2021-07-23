@@ -77,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:text="Discription goes here"
                 android:visibility="invisible" />
+
             <ImageView
                 android:id="@+id/icon"
                 android:layout_width="300dp"
@@ -93,10 +94,9 @@
             android:layout_height="match_parent"
             android:id="@+id/popout_menu"
             app:headerLayout="@layout/popout_header"
-            android:menu="@menu/main_activity_actions"
+            app:menu="@menu/main_activity_actions"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:menu="@menu/main_activity_actions"
             />
 
     </androidx.drawerlayout.widget.DrawerLayout>
